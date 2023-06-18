@@ -7,9 +7,12 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
+    "lint": "eslint .",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3"
   }
 }
