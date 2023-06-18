@@ -8,9 +8,11 @@
   "scripts": {
     "dev": "nodemon server.js",
     "lint": "eslint .",
-    "prepare": "husky install"
+    "commit-msg":"commitlint -E HUSKY_GIT_PARAMS"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
     "eslint": "^8.43.0",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3"
