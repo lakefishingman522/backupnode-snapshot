@@ -3,13 +3,14 @@ const cors = require('cors'); // Import the cors middleware
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const http = require('http');
 const morgan = require('morgan');
 
-const directoryPath = '/home/feynlan/utility/snapshots/cascadia';
-const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/snapshot.cascadia.foundation/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/snapshot.cascadia.foundation/fullchain.pem')
-  };
+const directoryPath = '/home/ubuntu/utility/snapshots/cascadia';
+// const options = {
+//     key: fs.readFileSync('/etc/letsencrypt/live/snapshot.cascadia.foundation/privkey.pem'),
+//     cert: fs.readFileSync('/etc/letsencrypt/live/snapshot.cascadia.foundation/fullchain.pem')
+//   };
 
 
 const heightFilePath = path.join(directoryPath, 'height');
@@ -68,6 +69,15 @@ app.get('/snapshots/:tarfilename', (req, res) => {
     readStream.pipe(res);
 });
 
-const server = https.createServer(options, app).listen(8443, () => {
-    console.log('Server listening on port 8443');
+// https
+
+// const server = http.createServer(options, app).listen(8888, () => {
+//     console.log('Server listening on port 8888');
+// });
+
+
+// http
+
+const server = http.createServer(app).listen(8888, () => {
+    console.log('Server listening on port 8888');
 });

@@ -1,16 +1,6 @@
 #!/bin/bash
 
 ###
-# https://rpc.cascadianet.net:443
-# https://rpc.cascadia.forbole.com:443
-# https://rpc-cascadia.ecostake.com:443
-# https://cascadia-rpc.polkachu.com:443
-# https://rpc-cascadia-ia.notional.ventures:443
-# http://node.d3cascadia.cloud:26657
-# http://cascadia.c29r3.xyz:80/rpc
-###
-
-###
 # cascadia statesync cron job
 # 0 5 * * 1 /bin/bash -c '/home/user/CASCCADIA_statesync.sh'
 ###
