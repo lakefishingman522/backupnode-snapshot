@@ -4,9 +4,9 @@ SNAP_PATH="$HOME/utility/snapshots/cascadia"
 LOG_PATH="$HOME/utility/snapshots/cascadia/cascadia_log.txt"
 HEIGHT_PATH="$HOME/utility/snapshots/cascadia/height"
 
-DATA_PATH="$HOME/.testcascadiad"
-SERVICE_NAME="cascadiad.service"
-RPC_ADDRESS="http://localhost:26657"
+DATA_PATH="$HOME/utility/upgradetest/.cascadiad"
+SERVICE_NAME="upgradetestcascadiad1.service"
+RPC_ADDRESS="http://localhost:27657"
 
 
 SNAP_NAME=$(echo "${CHAIN_ID}_$(date '+%Y-%m-%d').tar.lz4")
@@ -28,6 +28,8 @@ log_this() {
 LAST_BLOCK_HEIGHT=$(curl -s ${RPC_ADDRESS}/status | jq -r .result.sync_info.latest_block_height)
 log_this "LAST_BLOCK_HEIGHT ${LAST_BLOCK_HEIGHT}"
 
+echo ${LAST_BLOCK_HEIGHT}
+
 echo ${LAST_BLOCK_HEIGHT} > ${HEIGHT_PATH}
 
 log_this "Stopping ${SERVICE_NAME}"
@@ -35,7 +37,7 @@ sudo systemctl stop ${SERVICE_NAME}; echo $? >> ${LOG_PATH}
 
 log_this "Creating new snapshot"
 
-mv ${DATA_PATH}/data/priv_validator_state.json ${DATA_PATH}/priv_validator_state.json.backup
+cp ${DATA_PATH}/data/priv_validator_state.json ${DATA_PATH}/priv_validator_state.json.backup
 
 # time tar cf ${HOME}/${SNAP_NAME} -C ${DATA_PATH} . &>>${LOG_PATH}
 { time tar cf - -C ${DATA_PATH} data | pv -s $(du -sb ${DATA_PATH}/data | awk '{print $1}') | lz4 -c -9 > ${HOME}/${SNAP_NAME}; } | pv -b
